@@ -1,3 +1,15 @@
+terraform {
+  required_providers {
+    github = {
+      source = "integrations/github"
+    }
+
+    alicloud = {
+      source = "aliyun/alicloud"
+    }
+  }
+}
+
 provider "alicloud" {
   region = var.region
   profile = var.profile
@@ -8,11 +20,9 @@ provider "aws" {
   profile = var.aws_profile
 }
 
-
 provider "github" {
   token = var.github_token
-  organization = ""
-  version = "~> 2.1.0"
+  owner = ""
 }
 
 data "github_user" "ssh" {
@@ -34,14 +44,14 @@ data "template_file" "init_script" {
 }
 
 resource "alicloud_vpc" "vpc" {
-  name = "tf_test_foo"
+  vpc_name = "tf_test_foo"
   cidr_block = "172.16.0.0/12"
 }
 
 resource "alicloud_vswitch" "vsw" {
   vpc_id = alicloud_vpc.vpc.id
   cidr_block = "172.16.0.0/21"
-  availability_zone = "${var.region}-a"
+  zone_id = "${var.region}-a"
 }
 
 data "alicloud_instance_types" "types_ds" {

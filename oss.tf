@@ -13,7 +13,7 @@ resource "alicloud_oss_bucket" "bucket-package" {
   }
 
   provisioner "local-exec" {
-    command = "wget https://github.com/shadowsocks/go-shadowsocks2/releases/download/v0.1.0/shadowsocks2-linux.gz"
+    command = "wget https://github.com/shadowsocks/go-shadowsocks2/releases/download/v0.1.5/shadowsocks2-linux.gz"
   }
 }
 
@@ -21,6 +21,6 @@ resource "alicloud_oss_bucket_object" "ssocks-file" {
   acl = "public-read"
 
   bucket = alicloud_oss_bucket.bucket-package.bucket
-  key = "shadowsocks2-linux.0.1.0.gz"
+  key = "shadowsocks2-linux.0.1.5.gz"
   source = "shadowsocks2-linux.gz"
 }

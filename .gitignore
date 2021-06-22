@@ -25,3 +25,5 @@ override.tf.json
 
 
 .idea/
+
+/shadowsocks2-linux.gz
